@@ -7,30 +7,18 @@ class Solution {
   public:
     int findPosition(int N) {
         // code here
-        if(N==0)
+        int i=1,count=0,ans=0;
+        while(N!=0)
         {
-            return -1;
+            if(N&1)
+            {
+                count++;
+                ans=i;
+            }
+            N=N>>1;
+            i++;
         }
-        int bit=N;
-        int countBit=0;
-        int pos=0;
-        
-        while(N>0)
-        {
-             N=N&(N-1);
-             countBit++;
-        }
-        if(countBit>1)
-       {
-           return -1;
-       }
-        N=bit;
-        while(N>0)
-        {
-            pos++;
-            N>>=1;
-        }
-        return pos;
+        return count==1?ans:-1;
     }
 };
 
