@@ -144,5 +144,4 @@ vector<int> leftView(Node *root)
    vector<int>ans;
    solve(root,ans,0);
    return ans;
-  
 }
