@@ -6,28 +6,22 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-  int solve(int W,vector<int>& wt,vector<int>& val,int sum,int& n,int i){
-        if(i>=n){
-            return sum;
-        }
-        if(W-wt[i]>=0){
-            int taken = solve(W-wt[i],wt,val,sum+val[i],n,i+1);
-            int notTaken = solve(W,wt,val,sum,n,i+1);
-            return max(taken,notTaken);
-        }
-        else{
-            int notTaken = solve(W,wt,val,sum,n,i+1);
-            return max(sum,notTaken);
-        }
-    }
     // Function to return max value that can be put in knapsack of capacity W.
+    vector<vector<int>>dp;
+      int fun(int i, int w, vector<int>& wt, vector<int>& val){
+        if(i>=wt.size()){return 0;}
+        if(dp[i][w]!=-1){return dp[i][w];}
+        int ans=0;
+        if(w>=wt[i]){
+            ans=max(ans,val[i]+fun(i+1, w-wt[i], wt, val));
+        }
+        ans=max(ans, fun(i+1, w, wt, val));
+        return dp[i][w]=ans;
+    }
     int knapSack(int W, vector<int>& wt, vector<int>& val) {
         // Your code here
-        int sum = 0;
-        int n = wt.size();
-        int taken = solve(W,wt,val,sum,n,0);
-        int notTaken = solve(W,wt,val,sum,n,1);
-        return max(taken,notTaken);
+         dp.resize(wt.size()+1, vector<int>(W+1, -1));
+        return fun(0, W, wt, val);
     }
 };
 
