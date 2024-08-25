@@ -6,28 +6,51 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
+  int binarySearch(int key, vector<int>&brr){
+      int low=0;
+      int high=brr.size()-1;
+      int idx=-1;
+      while(low<=high){
+          int mid=(low+high)/2;
+          if(brr[mid]<=key){
+              idx=mid;
+              low=mid+1;
+          }
+          else{
+          high=mid-1;
+      }
+      }
+      return idx;
+  }
     long long countPairs(vector<int> &arr, vector<int> &brr) {
         // Your Code goes here.
-        long long ans = 0;
-        sort(brr.begin(), brr.end());
-        for (int x : arr) {
-            if (x == 1) {
-                continue;
-            } 
-            else if (x == 2) {
-                ans += upper_bound(brr.begin(), brr.end(), 1) - brr.begin();
-                ans += brr.end() - lower_bound(brr.begin(), brr.end(), 5); 
-            } 
-            else if (x == 3) {
-                ans += upper_bound(brr.begin(), brr.end(), 2) - brr.begin();
-                ans += brr.end() - lower_bound(brr.begin(), brr.end(), 4); 
-            }
-            else {
-                ans += brr.end() - lower_bound(brr.begin(), brr.end(), x + 1);
-                ans += upper_bound(brr.begin(), brr.end(), 1) - brr.begin();
-            }
-            
+        long long ans=0;
+        long long one=0;
+        long long two=0;
+        long long threefour=0;
+        sort(brr.begin(),brr.end());
+        
+        for(auto x:brr){
+            if(x==1) one++;
+            else if(x==2) two++;
+            else if(x==3 || x==4) threefour++;
         }
+        
+        for(auto x:arr){
+            if(x!=1) {
+                ans=ans+one;
+            
+            if(x==2){
+                ans=ans-threefour;
+            }
+            if(x==3){
+                ans=ans+two;
+            }
+            int index=binarySearch(x,brr);
+            ans=ans+(brr.size()-index-1);
+        }
+        
+     }
         return ans;
     }
 };
