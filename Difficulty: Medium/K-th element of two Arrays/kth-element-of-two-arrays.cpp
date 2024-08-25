@@ -8,16 +8,14 @@ class Solution {
   public:
     int kthElement(int k, vector<int>& arr1, vector<int>& arr2) {
         // code here
-        int n=arr1.size();
-        int m=arr2.size();
-        vector<long long int>ans;
-        for(int i=0;i<n;i++)
+        vector<int>ans;
+        for(auto &i:arr1)
         {
-            ans.push_back(arr1[i]);
+            ans.push_back(i);
         }
-        for(int i=0;i<m;i++)
+        for(auto &i:arr2)
         {
-            ans.push_back(arr2[i]);
+            ans.push_back(i);
         }
         sort(ans.begin(),ans.end());
         return ans[k-1];
