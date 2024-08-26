@@ -37,7 +37,7 @@ class Solution {
     }
     int wildCard(string pattern, string str) {
         // code here
-        int n = pattern.size();
+         int n = pattern.size();
         int m = str.size();
         vector<vector<int>>dp(n, vector<int>(m,-1));
         return rec(0,0,pattern, str, dp);
