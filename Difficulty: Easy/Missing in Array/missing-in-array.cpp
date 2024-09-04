@@ -14,9 +14,9 @@ class Solution {
     int missingNumber(int n, vector<int>& arr) {
 
         // Your code goes here
-        long long sum=0;
-        long long total=n*(n+1)/2;
-        for(int i=0;i<n-1;i++)
+        int total=n*(n+1)/2;
+        int sum=0;
+        for(int i=0;i<arr.size();i++)
         {
             sum=sum+arr[i];
         }
